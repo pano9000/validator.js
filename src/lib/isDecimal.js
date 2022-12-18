@@ -1,6 +1,5 @@
 import merge from './util/merge';
 import assertString from './util/assertString';
-import includes from './util/includes';
 import { decimal } from './alpha';
 
 function decimalRegExp(options) {
@@ -20,7 +19,7 @@ export default function isDecimal(str, options) {
   assertString(str);
   options = merge(options, default_decimal_options);
   if (options.locale in decimal) {
-    return !includes(blacklist, str.replace(/ /g, '')) && decimalRegExp(options).test(str);
+    return !blacklist.includes(str.replace(/ /g, '')) && decimalRegExp(options).test(str);
   }
   throw new Error(`Invalid locale '${options.locale}'`);
 }
